@@ -8,3 +8,6 @@ class Player:
         self.power = power
         self.currentExp = currentExp
         self.limitExp = limitExp
+    
+    def getMaxHealCost(self):
+        return int((self.maxHealth - self.currentHealth) * 1.25)
