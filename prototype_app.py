@@ -19,11 +19,24 @@ class MainApp:
         match self.gameState:
             case "actionChoose":
                 self.actionChoose()
+            case _:
+                print("Menu is not available.")
 
     def actionChoose (self):
         print("What will you do?")
         print("(1) ==> Fight a monster")
         print("(2) ==> Heal [Cost: 0 point(s)]")
+
+        playerChoice = input("Your choice: ")
+        match playerChoice:
+            case "1":
+                self.gameState = "chooseMonster"
+            case "2":
+                self.gameState = "healSelf"
+        self.stateRouter()
+    
+    def chooseMonster(self):
+        pass 
     
     def printPlayerStatus(self):
         print(f"playerName: {self.playerData.name}")

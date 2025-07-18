@@ -1,0 +1,18 @@
+{
+    "monsterList": [
+        {
+            "name": "Skeleton Thief",
+            "health": 100,
+            "power": 17,
+            "expGain": 50,
+            "pointGain": 60
+        },
+        {
+            "name": "Skeleton Knight",
+            "health": 450,
+            "power": 45,
+            "expGain": 165,
+            "pointGain": 198
+        }
+    ]
+}
