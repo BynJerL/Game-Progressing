@@ -1,4 +1,5 @@
 from player import Player
+from fighter import Fighter
 import json
 
 class MainApp:
@@ -24,6 +25,8 @@ class MainApp:
                 self.actionChoose()
             case "chooseMonster":
                 self.chooseMonster()
+            case "battle":
+                self.battle()
             case _:
                 print("Menu is not available.")
     
@@ -65,6 +68,22 @@ class MainApp:
         except ValueError:
             print("Invalid input. Please enter a number.")
     
+    def battle(self):
+        playerFighter = Fighter(
+            name=self.playerData.name,
+            health=self.playerData.currentHealth,
+            maxHealth=self.playerData.maxHealth,
+            power=self.playerData.power
+        )
+        monsterFighter = Fighter(
+            name=self.monsterData['name'],
+            health=self.monsterData['health'],
+            maxHealth=self.monsterData['health'],
+            power=self.monsterData['power']
+        )
+
+        print(f"A battle has started between {playerFighter.name} and {monsterFighter.name}!")
+
     def printPlayerStatus(self):
         print(f"playerName: {self.playerData.name}")
         print(f"playerLevel: {self.playerData.level}")
