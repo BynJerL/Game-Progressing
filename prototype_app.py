@@ -1,8 +1,11 @@
 from player import Player
+import json
 
 class MainApp:
     def __init__(self):
         self.playerData = None
+        self.monsterData = None
+        self.monsterList = []
         self.gameState = None
 
     def initialRun(self):
@@ -19,8 +22,15 @@ class MainApp:
         match self.gameState:
             case "actionChoose":
                 self.actionChoose()
+            case "chooseMonster":
+                self.chooseMonster()
             case _:
                 print("Menu is not available.")
+    
+    def getMonsters (self):
+        with open("monsterData.json", "r") as file:
+            monsters = json.load(file)
+        self.monsterList = monsters.get("monsterList", [])
 
     def actionChoose (self):
         print("What will you do?")
@@ -36,7 +46,24 @@ class MainApp:
         self.stateRouter()
     
     def chooseMonster(self):
-        pass 
+        print("Pick your opponent:")
+        self.getMonsters()
+        for i, monster in enumerate(self.monsterList):
+            print(f"({i + 1}) ==> {monster['name']} (Health: {monster['health']}, Power: {monster['power']})")
+        
+        playerChoice = input("Your choice: ")
+        try:
+            monsterIndex = int(playerChoice) - 1
+            if 0 <= monsterIndex < len(self.monsterList):
+                self.monsterData = self.monsterList[monsterIndex]
+                print(f"You have chosen {self.monsterData['name']}.")
+                self.gameState = "battle"
+            else:
+                print("Invalid choice. Please try again.")
+            
+            self.stateRouter()
+        except ValueError:
+            print("Invalid input. Please enter a number.")
     
     def printPlayerStatus(self):
         print(f"playerName: {self.playerData.name}")
