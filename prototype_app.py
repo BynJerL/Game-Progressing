@@ -3,6 +3,7 @@ from player import Player
 class MainApp:
     def __init__(self):
         self.playerData = None
+        self.gameState = None
 
     def initialRun(self):
         playerName = input("Insert your name: ")
@@ -10,6 +11,19 @@ class MainApp:
 
         print("Your current status:")
         self.printPlayerStatus()
+        self.gameState = "actionChoose"
+        self.stateRouter()
+    
+    def stateRouter (self):
+        print()
+        match self.gameState:
+            case "actionChoose":
+                self.actionChoose()
+
+    def actionChoose (self):
+        print("What will you do?")
+        print("(1) ==> Fight a monster")
+        print("(2) ==> Heal [Cost: 0 point(s)]")
     
     def printPlayerStatus(self):
         print(f"playerName: {self.playerData.name}")
