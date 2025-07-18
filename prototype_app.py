@@ -1,5 +1,6 @@
 from player import Player
 from fighter import Fighter
+from battleManager import BattleManager
 import json
 
 class MainApp:
@@ -83,6 +84,26 @@ class MainApp:
         )
 
         print(f"A battle has started between {playerFighter.name} and {monsterFighter.name}!")
+
+        battleManager = BattleManager(playerFighter=playerFighter, monsterFighter=monsterFighter)
+        battleManager.startBattle()
+        
+        while battleManager.isRunning:
+            battleManager.battleLoop()
+        
+        if battleManager.winner == playerFighter:
+            gainedExp = self.monsterData['expGain']
+            gainedPoint = self.monsterData['pointGain']
+            self.playerData.currentExp += gainedExp
+            self.playerData.point += gainedPoint
+            self.playerData.currentHealth = battleManager.playerFighter.currHealth
+            input(f"You got {gainedExp} Exp and {gainedPoint} Point(s)")
+            self.gameState = "actionChoose"
+            self.printPlayerStatus()
+        else:
+            self.gameState = "gameOver"
+            print("Game Over!")
+        self.stateRouter()
 
     def printPlayerStatus(self):
         print(f"playerName: {self.playerData.name}")

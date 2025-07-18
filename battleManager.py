@@ -11,6 +11,7 @@ class BattleManager:
 
     def startBattle(self):
         print("Battle started!")
+        self.battleLoop()
         
     def battleLoop(self):
         if self.isPlayerTurn:
