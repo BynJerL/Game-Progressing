@@ -112,6 +112,9 @@ class MainApp:
             self.playerData.point += gainedPoint
             self.playerData.currentHealth = battleManager.playerFighter.currHealth
             input(f"You got {gainedExp} Exp and {gainedPoint} Point(s)")
+            while self.playerData.currentExp >= self.playerData.limitExp:
+                self.playerData.levelUp()
+                print(f"{self.playerData.name} has leveled up to level {self.playerData.level}!")
             self.gameState = "actionChoose"
             self.printPlayerStatus()
         else:

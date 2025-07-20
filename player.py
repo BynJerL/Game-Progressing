@@ -11,3 +11,10 @@ class Player:
     
     def getMaxHealCost(self):
         return int((self.maxHealth - self.currentHealth) * 1.25)
+
+    def levelUp(self):
+        self.level += 1
+        self.limitExp = int(self.limitExp * 2.5)
+        self.maxHealth += 15
+        self.currentHealth = self.maxHealth
+        self.power += 3
