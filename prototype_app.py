@@ -56,7 +56,7 @@ class MainApp:
     def healSelf(self):
         healCost = min(self.playerData.point, self.playerData.getMaxHealCost())
         self.playerData.point -= healCost
-        healPower = int(0.8 * healCost)
+        healPower = round(0.8 * healCost)
         self.playerData.currentHealth = min(self.playerData.currentHealth + healPower, self.playerData.maxHealth)
         print(f"You have restored {healPower} HP\n")
         self.printPlayerStatus()
@@ -82,6 +82,7 @@ class MainApp:
             self.stateRouter()
         except ValueError:
             print("Invalid input. Please enter a number.")
+            self.stateRouter()
     
     def battle(self):
         playerFighter = Fighter(
